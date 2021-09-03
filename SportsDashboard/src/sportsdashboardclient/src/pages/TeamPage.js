@@ -1,7 +1,8 @@
 import {React, useEffect, useState} from "react";
 import { MatchDetailCard } from "../components/MatchDetailcard";
 import { MatchSmallCard } from "../components/MatchSmallCard";
-
+import {BrowserRouter as router} from 'react-router-dom';
+import {useParams} from "react-router-dom";
 
 
 export const TeamPage = () =>  {
@@ -10,6 +11,9 @@ export const TeamPage = () =>  {
     const [team, setTeam] = useState({matches: []});
     // team= this.setTeam;
 
+    //getting teamName from App.js using the useparams function
+    const {teamName}= useParams();
+
     //useEffect: used to load a sideeffect when Teampage component loads( fetching out live data from the springboot rest api )
     useEffect(
       () => {
@@ -17,7 +21,7 @@ export const TeamPage = () =>  {
         const fetchMatches = async () => {
             //awaiting because fetch returns a promise by sending api request to the end point passed
             //we await for response because a promise can either be prnding, fulfilled or rejected
-            const response  = await fetch('http://localhost:8080/team/Delhi%20Capitals');
+            const response  = await fetch(`http://localhost:8080/team/${teamName}`);
             const data = await response.json();
             setTeam(data);
 
@@ -26,15 +30,20 @@ export const TeamPage = () =>  {
 
         };
         fetchMatches();
-    },[]
+    },[teamName]
   );
+
+  //taking care of an edge case
+  if(!team || !team.teamName){
+    return <h1>Team not Found!</h1>
+  }
 
   return (
     <div className="TeamPage">
       <h1>{team.teamName}</h1>
-      <MatchDetailCard match = {team.matches[0]} />
+      <MatchDetailCard teamName = {team.teamName} match = {team.matches[0]} />
 
-      {team.matches.slice(1).map(match => <MatchSmallCard match = {match} /> )}
+      {team.matches.slice(1).map(match => <MatchSmallCard teamName = {team.teamName}  match = {match} /> )}
       
 
     </div>
