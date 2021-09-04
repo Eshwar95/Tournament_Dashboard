@@ -9,7 +9,7 @@ export const MatchSmallCard = ({teamName, match}) =>  {
   //   return "no";
   // }
   if(!match) return null;
-  const otherTeam = match.team1 === teamName ?  match.team2 : match.team1;
+  const otherTeam = match.team1 === teamName ?  match.team1 : match.team2 ;
   const otherTeamRoute = `/teams/${otherTeam}`;
   return (
     <div className="MatchSmallCard">
