@@ -11,7 +11,7 @@ function App() {
       <Router>
         <Switch>
           //we add match page first because switch picks up the first route and decides based on it. So we add Matchpage first because its end point is bigger and is a super set of Teampage
-        <Route path = "/team/:teamName/matches/:year">
+        <Route path = "/teams/:teamName/matches/:year">
             <MatchPage />
           </Route>
           <Route path = "/teams/:teamName">
