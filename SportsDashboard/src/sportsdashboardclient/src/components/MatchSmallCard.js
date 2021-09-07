@@ -1,20 +1,21 @@
 import {React} from "react";
 import {Link} from 'react-router-dom';
+import './MatchSmallCard.scss';
 
 
 
-export const MatchSmallCard = ({teamName, match}) =>  {
+export const MatchSmallCard = ({match, teamName}) =>  {
+  if(!match) return null || "Matches Not Found";
 
-  // if(!match ){
-  //   return "no";
-  // }
-  if(!match) return null;
-  const otherTeam = match.team1 === teamName ?  match.team1 : match.team2 ;
+  const otherTeam = match.team1 === teamName  ?  match.team2 : match.team1;
+  const isMatchWon = teamName  === match.matchWinner;
+
   const otherTeamRoute = `/teams/${otherTeam}`;
   return (
-    <div className="MatchSmallCard">
-      <h3>vs <Link to={otherTeamRoute}>{otherTeam}</Link>  </h3>
-      <h3>{match.matchWinner} won by {match.resultMargin} {match.result}</h3>
+    <div className={isMatchWon? 'MatchSmallCard won-card' : 'MatchSmallCard lost-card'}>
+      <h3>vs</h3>
+      <h1><Link to={otherTeamRoute}>{otherTeam}</Link></h1>
+      <h3 className="match-result">{match.matchWinner} won by {match.resultMargin} {match.result}</h3>
     </div>
   );
 } 

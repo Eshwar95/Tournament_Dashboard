@@ -1,0 +1,38 @@
+.TeamPage {
+    // background-color: beige;
+    display: grid;
+    grid-template-columns:   1fr 1fr 1fr 1fr ;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+
+    .team-name-section{
+        grid-column: span 3 ;
+        justify-self: start;
+        align-self: end;
+        // background-color: aquamarine;
+    }
+
+    .match-detail-section {
+        grid-column: span 4;
+        // background-color: grey;
+    }
+
+    .team-name{
+        font-size: 4rem;
+        margin-bottom: 20px;
+    }
+
+    .wins-losses-section{
+        justify-self: center;
+        padding: 30px;
+        text-align:  center;
+        font-size: auto;
+    }
+
+    .more-Link {
+        align-self: center;
+        justify-self: center;
+        font-size: 1.5rem;
+    }
+}
