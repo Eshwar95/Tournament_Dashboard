@@ -31,6 +31,7 @@ public class TeamController {
         Team team =  this.teamRepository.findByTeamName(teamName);
         team.setMatches(matchRepository.findLatestMatchesbyTeam(teamName, 4));
         Team newt = team;
+        System.out.println("What were sending to clint" +  newt);
         return newt;
     }
 
